@@ -1,11 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native';
+
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <TouchableHighlight>
+      <Image source = {require('../Diary_App/assets/back_btn.png')}/>
+      </TouchableHighlight>
       <StatusBar style="auto" />
     </View>
   );
@@ -14,8 +17,13 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#bff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  button: {
+    minHeight: 37,
+    minWidth: 37,
+    backgroundColor: '#fda'
+  }
 });
