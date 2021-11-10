@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, TouchableHighlight, Image } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { StyleSheet, View, TouchableOpacity} from 'react-native';
 
 
 export default function App() {
-
-  const [count, setCount] = useState(0);
-  const onPress = () => setCount(count + 1);
-
   return (
     <View style={styles.container}>
-      <TouchableHighlight style={styles.button}>
-          <Image source = {require("../Diary_App/assets/back_btn.png")}/>
-      </TouchableHighlight>
+      
+
+      <StatusBar style="auto" />
     </View>
   );
 }
@@ -19,13 +16,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#bff',
+    backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
-  },
-  button:{
-    height: 40,
-    width: 40,
-    backgroundColor: "#bf8"
+    justifyContent: 'center',
   }
 });
