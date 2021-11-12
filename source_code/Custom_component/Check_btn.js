@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const Check_Btn = (props) => {
   return (
     <TouchableOpacity
-    onPress = {props.onPressFunciton}
+    onPress = {props.onPress}
     style={styles.button}>
     <Icon name="check-circle" size={40} color="#A2D2FF"/>
   </TouchableOpacity>
@@ -16,9 +16,10 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
-    width: 40,
-    borderRadius: 100
+    height: 37,
+    width: 37,
+    borderRadius: 100,
+    backgroundColor: '#000'
   }
 });
 

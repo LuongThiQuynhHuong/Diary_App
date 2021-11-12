@@ -5,9 +5,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const Clue_Btn = (props) => {
   return (
     <TouchableOpacity
-    onPress = {props.onPressFunciton}
+    onPress = {props.onPress}
     style={styles.button}>
-    <Icon name="clipboard" size={21} color="#FFF"/>
+    <Icon name="clipboard" size={22} color="#000"/>
   </TouchableOpacity>
   );
 }
@@ -16,9 +16,11 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 33,
-    width: 33,
-    borderRadius: 100
+    height: 37,
+    width: 37,
+    borderRadius: 100,
+    backgroundColor: '#A2D2FF',
+    borderWidth: 1
   }
 });
 
