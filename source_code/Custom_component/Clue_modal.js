@@ -2,17 +2,20 @@ import React, {useState} from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import Back_Btn from './Back_btn'
 import Check_Btn from './Check_btn'
+import clues from '../ClueQuestion'
 
 const Clue_Modal = (props) =>{
-    const [answercontent, setanswercontent] = useState('')
+    const [answercontent, setanswercontent] = useState('');
+    const [num, setnum] = useState(Math.floor(Math.random() * 5));
     const closeModal = (bool, content)=>{
         props.changeModalVisible(bool);
-        props.setcontent(content);
+        if (content != '')
+            props.setcontent(content);
     }
     return(
         <View style = {styles.modal_container}>
             <View style = {styles.question_container}>
-                <Text style={styles.question_text}>What are you Today</Text>
+                <Text style={styles.question_text}>{clues[num]}</Text>
             </View>
             <TextInput style = {styles.anwser_input}
                 placeholder = 'Write your answer here!'
@@ -24,7 +27,7 @@ const Clue_Modal = (props) =>{
                     <Back_Btn onPress = {()=>closeModal(false,'')}/>
                 </View>
                 <View style ={styles.check_btn}>
-                    <Check_Btn onPress = {()=>closeModal(false,answercontent)}/>
+                    <Check_Btn onPress = {()=>closeModal(false,answercontent.trim())}/>
                 </View>
             </View>   
         </View>
@@ -34,7 +37,7 @@ const Clue_Modal = (props) =>{
 
 const styles = StyleSheet.create({
     modal_container:{
-        height : '100%', 
+        flex: 1,
         backgroundColor:'#FEF9EF'
     },
     question_container:{
