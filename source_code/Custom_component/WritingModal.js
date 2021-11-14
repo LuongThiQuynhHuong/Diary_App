@@ -1,14 +1,36 @@
 import React, {useState} from 'react';
-import {Modal, View, StyleSheet, TextInput, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {Platform, Modal, View, StyleSheet, TextInput, TouchableWithoutFeedback, Keyboard,Text, TouchableHighlight} from 'react-native';
 import Clue_Btn from './Clue_btn';
 import Check_Btn from './Check_btn';
 import Clue_Modal from './Clue_modal';
 import { StatusBar } from 'expo-status-bar';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const WritingModal = (props) => {
     const [visibleClue, setVisibleClue] = useState(false);
     const [title, settitle] = useState('');
     const [content, setcontent] = useState('');
+    const [mode, setmode] = useState('date')
+
+    // handle datetime
+    const [date, setdate] = useState(new Date());
+    const [show, setshow] = useState(false);
+    const [dateText, setdateText] = useState('Choose Date');
+
+    const onChangeDate = (e, selectedDate) => {
+      const currentDate = selectedDate||date;
+      setshow(Platform.OS==='ios');
+      setdate(currentDate);
+      let tempDate = new Date(currentDate);
+      let fDate = tempDate.getDate() + '/' + (tempDate.getMonth + 1) + '/' + tempDate.getFullYear();
+      setdateText(fDate);
+    }
+
+    const showMode=(currentMode)=>{
+      setshow(true);
+      setmode(currentMode);
+    }
 
     const changeVisibleClue = (bool) => {
       setVisibleClue(bool);
@@ -44,7 +66,23 @@ const WritingModal = (props) => {
           </View>
 
           <View style = {styles.select_section}>
+            <TouchableHighlight style={styles.dateContainer} onPress={()=>showMode('date')}>
+            <View style={styles.datewrap} >
+              <Icon name="calendar" size={18} color="#000"/>
+              <Text style = {styles.dateText}>
+                {dateText}
+              </Text>
+              {show && (<DateTimePicker testID='dateTimePicker'
+                        value={date}
+                        mode={mode}
+                        display='default'
+                        is24Hour={true}
+                        onChange={onChangeDate}/>)}
+            </View>
+            </TouchableHighlight>
+            <View style={styles.emotion}>
 
+            </View>
           </View>
 
           <TextInput style = {styles.title_input} 
@@ -93,9 +131,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#345'
     },
     select_section:{
-        alignItems: 'center',
-        height: '10%',
-        backgroundColor: '#789'
+        paddingTop: '1%',
+        paddingLeft: '5%',
+        height: 20,
+        flexDirection:'row',
+        justifyContent: 'flex-start'
     },
     title_input:{
         fontSize: 16,
@@ -136,5 +176,30 @@ const styles = StyleSheet.create({
     modalBG:{
       flex:1,
       zIndex: -1
+    },
+    dateContainer:{
+      width:'60%',
+      borderWidth: 1,
+      padding: 10,
+      borderColor: '#2DD6E8',
+      borderRadius: 20,
+      height:33,
+      backgroundColor: '#A2D2FF'
+    },
+    emotion:{
+      width:'30%',
+      borderWidth: 1,
+      marginLeft: 10,
+      borderColor: '#2DD6E8',
+      borderRadius: 20,
+      height:33,
+      backgroundColor: '#A2D2FF'
+    },
+    dateText: {
+      marginLeft: 10,
+      fontSize: 15
+    },
+    datewrap:{
+      flexDirection: 'row'
     }
 });
