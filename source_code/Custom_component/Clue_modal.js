@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import Back_Btn from './Back_btn'
 import Check_Btn from './Check_btn'
 import clues from '../ClueQuestion'
@@ -11,7 +11,8 @@ const Clue_Modal = (props) =>{
         props.changeModalVisible(bool);
         if (content != '')
             props.setcontent(content);
-    }
+    };
+    const dismisskeyboard=()=>Keyboard.dismiss();
     return(
         <View style = {styles.modal_container}>
             <View style = {styles.question_container}>
@@ -29,7 +30,10 @@ const Clue_Modal = (props) =>{
                 <View style ={styles.check_btn}>
                     <Check_Btn onPress = {()=>closeModal(false,answercontent.trim())}/>
                 </View>
-            </View>   
+            </View>
+            <TouchableWithoutFeedback onPress = {dismisskeyboard}>
+                <View style={[styles.modalBG, StyleSheet.absoluteFillObject]}/>
+            </TouchableWithoutFeedback>   
         </View>
     
     );
@@ -55,7 +59,8 @@ const styles = StyleSheet.create({
     question_text:{
         fontSize: 20,
         fontWeight: '400',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontWeight: 'bold'
     },
     anwser_input:{
         fontSize: 15,
@@ -81,6 +86,10 @@ const styles = StyleSheet.create({
     check_btn:{
         paddingLeft:'33%',
         width: '50%',
+    },
+    modalBG:{
+      flex:1,
+      zIndex: -1
     }
   });
 export default Clue_Modal;
